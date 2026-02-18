@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roommate Requests</title>
+</head>
+<body>
+  <h1>Requests</h1>
+  <% requests.forEach(request => { %>
+    <%- require("../components/MatchCard")(request) %>
+  <% }) %>
+  <p><a href="/create-profile">Create Profile</a> | <a href="/matches">View Matches</a></p>
+</body>
+</html>

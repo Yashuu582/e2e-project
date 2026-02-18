@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head><title>Verify Hostels</title></head>
+<body>
+  <%- require("../components/Sidebar")() %>
+  <h1>Verify Hostels</h1>
+  <% hostels.forEach(hostel => { %>
+    <div>
+      <h3><%= hostel.name %> - <%= hostel.location %></h3>
+      <p>Rooms: <%= hostel.rooms %>, Price: $<%= hostel.pricePerMonth %></p>
+      <p>Status: <%= hostel.verified ? "Verified" : "Pending" %></p>
+      <% if (!hostel.verified) { %>
+        <form method="POST" action="/verify-hostels/verify/<%= hostel._id %>" style="display:inline">
+          <button type="submit">Verify</button>
+        </form>
+        <form method="POST" action="/verify-hostels/reject/<%= hostel._id %>" style="display:inline">
+          <button type="submit">Reject</button>
+        </form>
+      <% } %>
+    </div>
+    <hr/>
+  <% }) %>
+</body>
+</html>
