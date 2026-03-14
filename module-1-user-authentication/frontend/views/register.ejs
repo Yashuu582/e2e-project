@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Register</h1>
+      <% if (error) { %>
+        <div class="error"><%= error %></div>
+      <% } %>
+      <form method="POST" action="/register">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <select name="gender" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+        <select name="userType" required>
+          <option value="">I am...</option>
+          <option value="seeker">Looking for Home (Seeker)</option>
+          <option value="provider">Have Home to Rent (Provider)</option>
+          <option value="admin">Admin</option>
+        </select>
+        <input type="password" name="password" placeholder="Password" required minlength="6">
+        <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+        <button type="submit">Register</button>
+      </form>
+      <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </div>
+</body>
+</html>

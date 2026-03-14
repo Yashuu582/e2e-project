@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FindMyStay - Smart Hostel System</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">FindMyStay</div>
+    <div class="nav-links">
+      <a href="http://localhost:8081/register">Register</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Welcome to FindMyStay</h1>
+    <p>Your trusted platform for safe hostels, compatible roommates, and affordable accommodation</p>
+    <div class="cta-buttons">
+      <a href="http://localhost:8081/register" class="btn primary">Register Now</a>
+      <a href="#logins" class="btn secondary">Login</a>
+    </div>
+  </section>
+
+  <section class="logins" id="logins">
+    <h2>Login to Your Account</h2>
+    <div class="login-grid">
+      <div class="login-card">
+        <div class="icon">🏠</div>
+        <h3>Seeker Login</h3>
+        <p>Looking for a home or roommate?</p>
+        <a href="http://localhost:8081/login/seeker" class="btn">Login as Seeker</a>
+      </div>
+      <div class="login-card">
+        <div class="icon">🏢</div>
+        <h3>Provider Login</h3>
+        <p>Have a hostel or room to rent?</p>
+        <a href="http://localhost:8081/login/provider" class="btn">Login as Provider</a>
+      </div>
+      <div class="login-card" style="border: 2px solid #e74c3c;">
+        <div class="icon">⚠️</div>
+        <h3>Admin Login</h3>
+        <p style="color: #e74c3c;">Restricted Area</p>
+        <a href="http://localhost:8081/login/admin" class="btn" style="background: #e74c3c;">Admin Access</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="modules">
+    <h2>Our Services</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">Please login to access all features</p>
+    <div class="module-grid">
+      
+      <div class="module-card">
+        <div class="icon">👤</div>
+        <h3>User Authentication</h3>
+        <p>Secure registration and login with profile management</p>
+        <a href="http://localhost:8081/register" class="btn">Register Now</a>
+      </div>
+
+      <div class="module-card locked">
+        <div class="icon">🏠</div>
+        <h3>Hostel Management</h3>
+        <p>Find verified hostels with complete details and reviews</p>
+        <span class="lock-badge">🔒 Login Required</span>
+      </div>
+
+      <div class="module-card locked">
+        <div class="icon">🤝</div>
+        <h3>Roommate Finder</h3>
+        <p>Smart matching algorithm to find compatible roommates</p>
+        <span class="lock-badge">🔒 Login Required</span>
+      </div>
+
+      <div class="module-card locked">
+        <div class="icon">⚙️</div>
+        <h3>Admin Panel</h3>
+        <p>Restricted Area - Admin Access Only</p>
+        <span class="lock-badge">🔒 Admin Only</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Why Choose FindMyStay?</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>✓ Verified Listings</h3>
+        <p>All hostels are verified by our admin team</p>
+      </div>
+      <div class="feature">
+        <h3>🔒 Safe & Secure</h3>
+        <p>Your data is protected with industry-standard security</p>
+      </div>
+      <div class="feature">
+        <h3>🎯 Smart Matching</h3>
+        <p>AI-powered roommate compatibility scoring</p>
+      </div>
+      <div class="feature">
+        <h3>💰 Transparent Pricing</h3>
+        <p>No hidden fees, clear pricing information</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 FindMyStay. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="http://localhost:8081/login">Login</a>
+      <a href="http://localhost:8081/register">Register</a>
+      <a href="http://localhost:8084" style="color: #e74c3c;">⚠️ Admin (Restricted)</a>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>⚠️ Admin Dashboard - Restricted Area</h2>
+    <div class="nav-links">
+      <a href="/">Dashboard</a>
+      <a href="/hostels/pending">Pending Hostels</a>
+      <a href="/users">Users</a>
+      <a href="http://localhost:8080" style="background: #e74c3c;">Exit Admin</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Dashboard Statistics</h1>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <% if (stats) { %>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number"><%= stats.totalUsers %></div>
+          <div class="stat-label">Total Users</div>
+        </div>
+
+        <div class="stat-card verified">
+          <div class="stat-number"><%= stats.verifiedUsers %></div>
+          <div class="stat-label">Verified Users</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number"><%= stats.totalHostels %></div>
+          <div class="stat-label">Total Hostels</div>
+        </div>
+
+        <div class="stat-card verified">
+          <div class="stat-number"><%= stats.verifiedHostels %></div>
+          <div class="stat-label">Verified Hostels</div>
+        </div>
+
+        <div class="stat-card pending">
+          <div class="stat-number"><%= stats.pendingHostels %></div>
+          <div class="stat-label">Pending Hostels</div>
+        </div>
+      </div>
+
+      <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <a href="/hostels/pending" class="action-btn">
+          <span class="badge"><%= stats.pendingHostels %></span>
+          Review Pending Hostels
+        </a>
+        <a href="/users" class="action-btn">
+          Manage Users
+        </a>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roommate Matches - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Your Roommate Matches</h2>
+    <a href="/" class="btn">Home</a>
+  </div>
+
+  <div class="container">
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <% if (matches.length === 0) { %>
+      <div class="no-matches">
+        <h3>No matches found</h3>
+        <p>Create your profile first to find compatible roommates</p>
+        <a href="/profile/create" class="btn">Create Profile</a>
+      </div>
+    <% } else { %>
+      <h2>Found <%= matches.length %> Compatible Roommates</h2>
+      <div class="matches-grid">
+        <% matches.forEach(match => { %>
+          <div class="match-card">
+            <div class="compatibility">
+              <span class="score"><%= match.compatibilityScore %>%</span>
+              <span>Compatibility</span>
+            </div>
+            
+            <h3><%= match.bio || 'Roommate' %></h3>
+            <p><strong>Age:</strong> <%= match.age %> | <strong>Occupation:</strong> <%= match.occupation %></p>
+            
+            <% if (match.bio) { %>
+              <p class="bio"><%= match.bio %></p>
+            <% } %>
+
+            <div class="info">
+              <p><strong>Budget:</strong> ₹<%= match.budget.min %> - ₹<%= match.budget.max %></p>
+              <p><strong>Location:</strong> <%= match.preferredLocation.city %></p>
+              <p><strong>Looking for:</strong> <%= match.lookingFor %></p>
+            </div>
+
+            <div class="preferences">
+              <h4>Preferences</h4>
+              <span class="tag">🚬 <%= match.preferences.smoking %></span>
+              <span class="tag">🍽️ <%= match.preferences.foodPreference %></span>
+              <span class="tag">😴 <%= match.preferences.sleepSchedule %></span>
+              <span class="tag">🧹 <%= match.preferences.cleanliness %></span>
+            </div>
+
+            <% if (match.interests && match.interests.length > 0) { %>
+              <div class="interests">
+                <h4>Interests</h4>
+                <% match.interests.forEach(interest => { %>
+                  <span class="tag"><%= interest %></span>
+                <% }) %>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

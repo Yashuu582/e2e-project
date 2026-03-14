@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hostel Management - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>FindMyStay - Hostel Management</h2>
+    <div class="nav-menu">
+      <a href="http://localhost:8082">Hostels</a>
+      <a href="http://localhost:8083">Find Roommates</a>
+      <a href="/logout" class="logout-btn">Logout</a>
+    </div>
+    <a href="/add" class="btn">Add Hostel</a>
+  </div>
+
+  <div class="container">
+    <div class="search-box">
+      <h3>Search Hostels</h3>
+      <form action="/search" method="GET">
+        <input type="text" name="city" placeholder="City">
+        <select name="hostelType">
+          <option value="">All Types</option>
+          <option value="boys">Boys</option>
+          <option value="girls">Girls</option>
+          <option value="co-ed">Co-ed</option>
+        </select>
+        <input type="text" name="search" placeholder="Search by name">
+        <button type="submit">Search</button>
+      </form>
+    </div>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <div class="hostel-grid">
+      <% if (hostels.length === 0) { %>
+        <div style="grid-column: 1/-1; text-align: center; padding: 60px; background: white; border-radius: 10px;">
+          <h3>No hostels found</h3>
+          <p style="margin: 20px 0; color: #666;">Be the first to add a hostel to our platform!</p>
+          <a href="/add" class="btn">Add First Hostel</a>
+        </div>
+      <% } else { %>
+        <% hostels.forEach(hostel => { %>
+          <div class="hostel-card">
+            <h3><%= hostel.name %></h3>
+            <p><strong>Type:</strong> <%= hostel.hostelType %></p>
+            <p><strong>Location:</strong> <%= hostel.address.city %>, <%= hostel.address.state %></p>
+            <p><strong>Contact:</strong> <%= hostel.contactNumber %></p>
+            <p><strong>Rating:</strong> <%= hostel.rating || 0 %> ⭐</p>
+            <% if (hostel.isVerified) { %>
+              <span class="verified">✓ Verified</span>
+            <% } else { %>
+              <span class="pending">Pending Verification</span>
+            <% } %>
+            <a href="/hostel/<%= hostel._id %>" class="btn">View Details</a>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+      <a href="/add" class="btn" style="padding: 15px 30px; font-size: 16px;">+ Add New Hostel</a>
+    </div>
+  </div>
+</body>
+</html>

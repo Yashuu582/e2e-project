@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hostel Details - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>FindMyStay - Hostel Details</h2>
+    <a href="/" class="btn">Back to List</a>
+  </div>
+
+  <div class="container">
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } else if (hostel) { %>
+      <div class="details-card">
+        <h1><%= hostel.name %></h1>
+        
+        <div class="info-section">
+          <h3>Basic Information</h3>
+          <p><strong>Type:</strong> <%= hostel.hostelType %></p>
+          <p><strong>Contact:</strong> <%= hostel.contactNumber %></p>
+          <% if (hostel.email) { %>
+            <p><strong>Email:</strong> <%= hostel.email %></p>
+          <% } %>
+          <p><strong>Rating:</strong> <%= hostel.rating || 0 %> ⭐</p>
+          <% if (hostel.isVerified) { %>
+            <span class="verified">✓ Verified</span>
+          <% } else { %>
+            <span class="pending">Pending Verification</span>
+          <% } %>
+        </div>
+
+        <div class="info-section">
+          <h3>Address</h3>
+          <p><%= hostel.address.street || '' %></p>
+          <p><%= hostel.address.city %>, <%= hostel.address.state %></p>
+          <% if (hostel.address.pincode) { %>
+            <p>PIN: <%= hostel.address.pincode %></p>
+          <% } %>
+        </div>
+
+        <% if (hostel.facilities && hostel.facilities.length > 0) { %>
+          <div class="info-section">
+            <h3>Facilities</h3>
+            <ul>
+              <% hostel.facilities.forEach(facility => { %>
+                <li><%= facility %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (hostel.roomTypes && hostel.roomTypes.length > 0) { %>
+          <div class="info-section">
+            <h3>Room Types</h3>
+            <% hostel.roomTypes.forEach(room => { %>
+              <div class="room-type">
+                <p><strong><%= room.type %></strong></p>
+                <p>Capacity: <%= room.capacity %> | Price: ₹<%= room.pricePerMonth %>/month</p>
+                <p>Available: <%= room.available || 0 %></p>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <% if (hostel.description) { %>
+          <div class="info-section">
+            <h3>Description</h3>
+            <p><%= hostel.description %></p>
+          </div>
+        <% } %>
+
+        <% if (hostel.rules && hostel.rules.length > 0) { %>
+          <div class="info-section">
+            <h3>Rules</h3>
+            <ul>
+              <% hostel.rules.forEach(rule => { %>
+                <li><%= rule %></li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+
+        <% if (hostel.reviews && hostel.reviews.length > 0) { %>
+          <div class="info-section">
+            <h3>Reviews</h3>
+            <% hostel.reviews.forEach(review => { %>
+              <div class="review">
+                <p><strong>Rating:</strong> <%= review.rating %> ⭐</p>
+                <p><%= review.comment %></p>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

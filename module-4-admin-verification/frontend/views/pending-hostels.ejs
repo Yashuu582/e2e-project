@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pending Hostels - Admin</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Pending Hostels Verification</h2>
+    <div class="nav-links">
+      <a href="/">Dashboard</a>
+      <a href="/hostels/pending">Pending Hostels</a>
+      <a href="/users">Users</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Hostels Awaiting Verification</h1>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <% if (hostels.length === 0) { %>
+      <div class="no-data">
+        <p>No pending hostels for verification</p>
+      </div>
+    <% } else { %>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Hostel Name</th>
+              <th>Type</th>
+              <th>Location</th>
+              <th>Owner</th>
+              <th>Contact</th>
+              <th>Created</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% hostels.forEach(hostel => { %>
+              <tr>
+                <td><strong><%= hostel.name %></strong></td>
+                <td><%= hostel.hostelType %></td>
+                <td><%= hostel.address.city %>, <%= hostel.address.state %></td>
+                <td><%= hostel.owner.name %></td>
+                <td><%= hostel.contactNumber %></td>
+                <td><%= new Date(hostel.createdAt).toLocaleDateString() %></td>
+                <td class="actions">
+                  <form method="POST" action="/hostels/<%= hostel._id %>/verify" style="display:inline">
+                    <button type="submit" class="btn-verify">✓ Verify</button>
+                  </form>
+                  <form method="POST" action="/hostels/<%= hostel._id %>/reject" style="display:inline">
+                    <button type="submit" class="btn-reject">✗ Reject</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

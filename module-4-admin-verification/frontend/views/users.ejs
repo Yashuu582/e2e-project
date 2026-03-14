@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Management - Admin</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>User Management</h2>
+    <div class="nav-links">
+      <a href="/">Dashboard</a>
+      <a href="/hostels/pending">Pending Hostels</a>
+      <a href="/users">Users</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>All Users</h1>
+
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } %>
+
+    <% if (users.length === 0) { %>
+      <div class="no-data">
+        <p>No users found</p>
+      </div>
+    <% } else { %>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Gender</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Joined</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.filter(user => user.role !== 'admin').forEach(user => { %>
+              <tr>
+                <td><strong><%= user.name %></strong></td>
+                <td><%= user.email %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.gender %></td>
+                <td><span class="role-badge <%= user.role %>"><%= user.role %></span></td>
+                <td>
+                  <% if (user.isVerified) { %>
+                    <span class="verified-badge">✓ Verified</span>
+                  <% } else { %>
+                    <span class="pending-badge">Pending</span>
+                  <% } %>
+                </td>
+                <td><%= new Date(user.createdAt).toLocaleDateString() %></td>
+                <td class="actions">
+                  <% if (!user.isVerified) { %>
+                    <form method="POST" action="/users/<%= user._id %>/verify" style="display:inline">
+                      <button type="submit" class="btn-verify">✓ Verify</button>
+                    </form>
+                  <% } %>
+                  <% if (user.role !== 'admin') { %>
+                    <form method="POST" action="/users/<%= user._id %>/delete" style="display:inline">
+                      <button type="submit" class="btn-reject">✗ Delete</button>
+                    </form>
+                  <% } %>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
