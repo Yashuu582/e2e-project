@@ -19,7 +19,7 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = 'http://localhost:4001/api';
+const API_URL = process.env.AUTH_BACKEND_URL || 'http://localhost:4001/api';
 
 // Home
 app.get('/', (req, res) => {
@@ -39,9 +39,7 @@ app.post('/register', async (req, res) => {
     console.log('Backend response:', response.data);
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    // Redirect to appropriate login page
-    const userType = response.data.user.userType;
-    res.redirect(`/login/${userType}?registered=true`);
+    res.redirect(`/login/${response.data.user.userType}?registered=true`);
   } catch (error) {
     console.error('Registration error:', error.response?.data || error.message);
     res.render('register', { error: error.response?.data?.message || 'Registration failed' });
@@ -75,7 +73,7 @@ app.post('/login/seeker', async (req, res) => {
     }
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    res.redirect('http://localhost:8083'); // Roommate finder
+    res.redirect(process.env.ROOMMATE_FRONTEND_URL || 'http://localhost:8083');
   } catch (error) {
     res.render('login-seeker', { error: error.response?.data?.message || 'Login failed', success: null });
   }
@@ -90,7 +88,7 @@ app.post('/login/provider', async (req, res) => {
     }
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    res.redirect('http://localhost:8082'); // Hostel management
+    res.redirect(process.env.HOSTEL_FRONTEND_URL || 'http://localhost:8082');
   } catch (error) {
     res.render('login-provider', { error: error.response?.data?.message || 'Login failed', success: null });
   }
@@ -105,7 +103,7 @@ app.post('/login/admin', async (req, res) => {
     }
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    res.redirect('http://localhost:8084'); // Admin dashboard
+    res.redirect(process.env.ADMIN_FRONTEND_URL || 'http://localhost:8084');
   } catch (error) {
     res.render('login-admin', { error: error.response?.data?.message || 'Login failed', success: null });
   }

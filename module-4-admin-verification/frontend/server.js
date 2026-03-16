@@ -17,13 +17,13 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = 'http://localhost:4004/api';
+const API_URL = process.env.ADMIN_BACKEND_URL || 'http://localhost:4004/api';
 
 // Middleware to check admin access
 const checkAdmin = (req, res, next) => {
   const userRole = req.session.userRole || 'admin';
   if (userRole !== 'admin') {
-    return res.status(403).send('<h1>Access Denied</h1><p>Admin access only. <a href="http://localhost:8081">Go to Login</a></p>');
+    return res.status(403).send('<h1>Access Denied</h1><p>Admin access only. <a href="' + (process.env.AUTH_FRONTEND_URL || 'http://localhost:8081') + '">Go to Login</a></p>');
   }
   next();
 };
