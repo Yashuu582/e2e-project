@@ -17,12 +17,12 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = process.env.ROOMMATE_BACKEND_URL || 'http://localhost:4003/api';
+const API_URL = process.env.ROOMMATE_BACKEND_URL || 'https://module-3-production-0980.up.railway.app/api';
 
 // Logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect((process.env.AUTH_FRONTEND_URL || 'http://localhost:8081') + '/login');
+  res.redirect((process.env.AUTH_FRONTEND_URL || 'https://module-1-frontend.up.railway.app') + '/login');
 });
 
 // Home

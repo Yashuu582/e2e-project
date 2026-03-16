@@ -19,7 +19,7 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = process.env.AUTH_BACKEND_URL || 'http://localhost:4001/api';
+const API_URL = process.env.AUTH_BACKEND_URL || 'https://module-1-production-8615.up.railway.app/api';
 
 // Home
 app.get('/', (req, res) => {
