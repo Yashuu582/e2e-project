@@ -19,7 +19,8 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose.connect(process.env.MONGODB_URI)
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb+srv://findmystay:findmystay@findmystay.stufssv.mongodb.net/findmystay?retryWrites=true&w=majority&appName=findmystay';
+mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error(err));
 
