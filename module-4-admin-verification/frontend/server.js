@@ -17,7 +17,7 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = process.env.ADMIN_BACKEND_URL || 'https://module-4-production-3736.up.railway.app/api';
+const API_URL = process.env.ADMIN_BACKEND_URL || 'https://4th-module-production.up.railway.app/api';
 
 // Middleware to check admin access
 const checkAdmin = (req, res, next) => {
