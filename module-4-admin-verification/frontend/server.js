@@ -23,7 +23,7 @@ const API_URL = process.env.ADMIN_BACKEND_URL || 'https://module-4-production-37
 const checkAdmin = (req, res, next) => {
   const userRole = req.session.userRole || 'admin';
   if (userRole !== 'admin') {
-    return res.status(403).send('<h1>Access Denied</h1><p>Admin access only. <a href="' + (process.env.AUTH_FRONTEND_URL || 'https://module-1-frontend.up.railway.app') + '">Go to Login</a></p>');
+    return res.status(403).send('<h1>Access Denied</h1><p>Admin access only. <a href="https://m1-frontend-production.up.railway.app">Go to Login</a></p>');
   }
   next();
 };

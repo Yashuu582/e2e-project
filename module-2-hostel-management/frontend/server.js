@@ -22,7 +22,7 @@ const API_URL = process.env.HOSTEL_BACKEND_URL || 'https://module-2-production-5
 // Logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect((process.env.AUTH_FRONTEND_URL || 'https://module-1-frontend.up.railway.app') + '/login');
+  res.redirect('https://m1-frontend-production.up.railway.app/login');
 });
 
 // Home - List all hostels

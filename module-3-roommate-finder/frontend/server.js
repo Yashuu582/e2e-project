@@ -22,7 +22,7 @@ const API_URL = process.env.ROOMMATE_BACKEND_URL || 'https://module-3-production
 // Logout
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect((process.env.AUTH_FRONTEND_URL || 'https://module-1-frontend.up.railway.app') + '/login');
+  res.redirect('https://m1-frontend-production.up.railway.app/login');
 });
 
 // Home

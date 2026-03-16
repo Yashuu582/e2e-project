@@ -73,7 +73,7 @@ app.post('/login/seeker', async (req, res) => {
     }
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    res.redirect(process.env.ROOMMATE_FRONTEND_URL || 'http://localhost:8083');
+    res.redirect('https://m3-frontend-production-0a25.up.railway.app');
   } catch (error) {
     res.render('login-seeker', { error: error.response?.data?.message || 'Login failed', success: null });
   }
@@ -88,7 +88,7 @@ app.post('/login/provider', async (req, res) => {
     }
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    res.redirect(process.env.HOSTEL_FRONTEND_URL || 'http://localhost:8082');
+    res.redirect('https://m2-frontend-production.up.railway.app');
   } catch (error) {
     res.render('login-provider', { error: error.response?.data?.message || 'Login failed', success: null });
   }
@@ -103,7 +103,7 @@ app.post('/login/admin', async (req, res) => {
     }
     req.session.token = response.data.token;
     req.session.user = response.data.user;
-    res.redirect(process.env.ADMIN_FRONTEND_URL || 'http://localhost:8084');
+    res.redirect('https://m4-frontend-production.up.railway.app');
   } catch (error) {
     res.render('login-admin', { error: error.response?.data?.message || 'Login failed', success: null });
   }
