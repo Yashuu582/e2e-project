@@ -17,7 +17,7 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = process.env.HOSTEL_BACKEND_URL || 'https://module-2-production-59e7.up.railway.app/api';
+const API_URL = process.env.HOSTEL_BACKEND_URL || 'https://2nd-module-production.up.railway.app/api';
 
 // Logout
 app.get('/logout', (req, res) => {
