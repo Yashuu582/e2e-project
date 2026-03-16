@@ -16,7 +16,7 @@ mongoose.connect(MONGO_URI)
 
 app.use('/api/admin', require('./routes/adminRoutes'));
 
-app.get('/health', (req, res) => res.json({ status: 'OK', module: 'Admin Verification' }));
+app.get('/health', (req, res) => res.json({ status: 'OK', module: 'Admin Verification', version: '2.0' }));
 
 const PORT = process.env.PORT || 4004;
 app.listen(PORT, () => console.log(`Module 4 running on port ${PORT}`));

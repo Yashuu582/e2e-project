@@ -26,7 +26,7 @@ mongoose.connect(MONGO_URI)
 
 app.use('/api/hostels', require('./routes/hostelRoutes'));
 
-app.get('/health', (req, res) => res.json({ status: 'OK', module: 'Hostel Management' }));
+app.get('/health', (req, res) => res.json({ status: 'OK', module: 'Hostel Management', version: '2.0' }));
 
 const PORT = process.env.PORT || 4002;
 app.listen(PORT, () => console.log(`Module 2 running on port ${PORT}`));

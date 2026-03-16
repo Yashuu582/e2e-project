@@ -16,7 +16,7 @@ mongoose.connect(MONGO_URI)
 
 app.use('/api/roommates', require('./routes/roommateRoutes'));
 
-app.get('/health', (req, res) => res.json({ status: 'OK', module: 'Roommate Finder' }));
+app.get('/health', (req, res) => res.json({ status: 'OK', module: 'Roommate Finder', version: '2.0' }));
 
 const PORT = process.env.PORT || 4003;
 app.listen(PORT, () => console.log(`Module 3 running on port ${PORT}`));

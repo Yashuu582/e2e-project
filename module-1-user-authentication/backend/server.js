@@ -21,7 +21,7 @@ connectDB();
 
 app.use('/api/auth', require('./routes/authRoutes'));
 
-app.get('/health', (req, res) => res.json({ status: 'OK', module: 'User Authentication' }));
+app.get('/health', (req, res) => res.json({ status: 'OK', module: 'User Authentication', version: '2.0' }));
 
 const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => console.log(`Module 1 running on port ${PORT}`));
