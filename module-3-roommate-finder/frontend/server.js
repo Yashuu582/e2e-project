@@ -17,7 +17,7 @@ app.use(session({
 }));
 app.use(express.static('public'));
 
-const API_URL = process.env.ROOMMATE_BACKEND_URL || 'https://module-3-production-0980.up.railway.app/api';
+const API_URL = process.env.ROOMMATE_BACKEND_URL || 'https://3rd-module-production.up.railway.app/api';
 
 // Logout
 app.get('/logout', (req, res) => {
