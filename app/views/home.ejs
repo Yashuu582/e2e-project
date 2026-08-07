@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head><title>FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar">
+    <h2>🏠 FindMyStay</h2>
+    <div>
+      <a href="/hostels">Hostels</a>
+      <a href="/roommates">Roommates</a>
+      <% if (user?.role === 'admin') { %><a href="/admin">Admin</a><% } %>
+      <% if (user) { %>
+        <a href="/logout" class="logout">Logout (<%=user.name%>)</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Welcome to FindMyStay</h1>
+      <p>Find safe hostels, compatible roommates, and affordable rentals — all in one place</p>
+      <div class="hero-btns">
+        <a href="/hostels" class="btn">Browse Hostels</a>
+        <a href="/roommates" class="btn outline">Find Roommates</a>
+        <% if (!user) { %><a href="/register" class="btn green">Get Started</a><% } %>
+      </div>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>🏨 Hostel Management</h3>
+        <p style="color:#666;margin:10px 0">Browse, search and add hostel listings with full details.</p>
+        <a href="/hostels" class="btn">View Hostels</a>
+      </div>
+      <div class="card">
+        <h3>🤝 Roommate Finder</h3>
+        <p style="color:#666;margin:10px 0">Create a profile and get matched with compatible roommates.</p>
+        <a href="/roommates" class="btn">Find Roommates</a>
+      </div>
+      <% if (user?.role === 'admin') { %>
+      <div class="card">
+        <h3>⚙️ Admin Panel</h3>
+        <p style="color:#666;margin:10px 0">Manage users, verify hostels and view platform stats.</p>
+        <a href="/admin" class="btn red">Admin Panel</a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

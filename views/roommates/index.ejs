@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>Roommate Finder - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar">
+    <h2>🏠 FindMyStay</h2>
+    <div>
+      <a href="/">Home</a><a href="/hostels">Hostels</a><a href="/roommates" class="active">Roommates</a>
+      <% if(user?.role==='admin'){%><a href="/admin">Admin</a><%}%>
+      <% if(user){%><a href="/logout" class="logout">Logout</a><%}else{%><a href="/login">Login</a><%}%>
+    </div>
+  </div>
+  <div class="container">
+    <div class="hero">
+      <h1>🤝 Find Your Perfect Roommate</h1>
+      <p>Create a profile and get matched with compatible roommates based on your preferences</p>
+      <div class="hero-btns">
+        <a href="/roommates/create" class="btn">Create Profile</a>
+        <a href="/roommates/matches" class="btn outline">View Matches</a>
+      </div>
+    </div>
+    <div class="grid grid-3">
+      <div class="card"><h3>🎯 Smart Matching</h3><p style="color:#666;margin-top:8px">Matched by lifestyle, budget and location preferences.</p></div>
+      <div class="card"><h3>💰 Budget Filter</h3><p style="color:#666;margin-top:8px">Find roommates within your monthly budget range.</p></div>
+      <div class="card"><h3>📍 Location Based</h3><p style="color:#666;margin-top:8px">Find roommates in your preferred city and areas.</p></div>
+    </div>
+  </div>
+</body>
+</html>

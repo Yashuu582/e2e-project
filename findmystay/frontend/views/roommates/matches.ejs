@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Roommate Matches - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Your Roommate Matches</h2>
+    <div class="nav-links"><a href="/roommates">Home</a></div>
+  </div>
+
+  <div class="container">
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+
+    <% if (matches.length === 0) { %>
+      <div class="no-matches">
+        <h3>No matches found</h3>
+        <p>Create your profile first to find compatible roommates</p>
+        <a href="/roommates/profile/create" class="btn" style="margin-top:15px">Create Profile</a>
+      </div>
+    <% } else { %>
+      <h2>Found <%= matches.length %> Compatible Roommates</h2>
+      <div class="matches-grid">
+        <% matches.forEach(match => { %>
+          <div class="match-card">
+            <div class="compatibility">
+              <span class="score"><%= match.compatibilityScore %>%</span>
+              <span>Compatibility</span>
+            </div>
+            <h3><%= match.bio || 'Roommate' %></h3>
+            <p><strong>Age:</strong> <%= match.age %> | <strong>Occupation:</strong> <%= match.occupation %></p>
+            <div style="margin:10px 0">
+              <p><strong>Budget:</strong> ₹<%= match.budget.min %> - ₹<%= match.budget.max %></p>
+              <p><strong>Location:</strong> <%= match.preferredLocation.city %></p>
+              <p><strong>Looking for:</strong> <%= match.lookingFor %></p>
+            </div>
+            <div>
+              <span class="tag">🚬 <%= match.preferences.smoking %></span>
+              <span class="tag">🍽️ <%= match.preferences.foodPreference %></span>
+              <span class="tag">😴 <%= match.preferences.sleepSchedule %></span>
+              <span class="tag">🧹 <%= match.preferences.cleanliness %></span>
+            </div>
+            <% if (match.interests && match.interests.length > 0) { %>
+              <div style="margin-top:10px">
+                <% match.interests.forEach(i => { %><span class="tag"><%= i %></span><% }) %>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head><title>Login - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar"><h2>🏠 FindMyStay</h2><div><a href="/">Home</a><a href="/register">Register</a></div></div>
+  <div class="container">
+    <div class="auth-wrap">
+      <div class="auth-card" <% if(type==='admin'){%>style="border:2px solid #e74c3c"<%}%>>
+        <h1>
+          <% if(type==='seeker') { %>🏠 Seeker Login
+          <% } else if(type==='provider') { %>🏢 Provider Login
+          <% } else { %>⚠️ Admin Login<% } %>
+        </h1>
+        <p class="subtitle">
+          <% if(type==='seeker') { %>Looking for a home? Login here
+          <% } else if(type==='provider') { %>Have a hostel to rent? Login here
+          <% } else { %>Restricted Area — Admin Only<% } %>
+        </p>
+        <% if (error) { %><div class="alert error"><%=error%></div><% } %>
+        <form method="POST" action="/login/<%=type%>">
+          <div class="form-group"><input type="email" name="email" placeholder="Email" required></div>
+          <div class="form-group"><input type="password" name="password" placeholder="Password" required></div>
+          <button type="submit" class="btn full" <% if(type==='admin'){%>style="background:#e74c3c"<%}%>>
+            Login as <%= type.charAt(0).toUpperCase() + type.slice(1) %>
+          </button>
+        </form>
+        <div class="auth-links">
+          <% if(type!=='seeker') { %><a href="/login/seeker">Seeker Login</a> | <% } %>
+          <% if(type!=='provider') { %><a href="/login/provider">Provider Login</a> | <% } %>
+          <% if(type!=='admin') { %><a href="/login/admin">Admin Login</a> | <% } %>
+          <a href="/register">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hostel Details - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Hostel Details</h2>
+    <div class="nav-links"><a href="/hostels">Back to Hostels</a></div>
+  </div>
+
+  <div class="container">
+    <% if (error) { %>
+      <div class="error"><%= error %></div>
+    <% } else if (hostel) { %>
+      <div class="details-card">
+        <h1><%= hostel.name %></h1>
+
+        <div class="info-section">
+          <h3>Basic Information</h3>
+          <p><strong>Type:</strong> <%= hostel.hostelType %></p>
+          <p><strong>Contact:</strong> <%= hostel.contactNumber %></p>
+          <% if (hostel.email) { %><p><strong>Email:</strong> <%= hostel.email %></p><% } %>
+          <p><strong>Rating:</strong> <%= hostel.rating || 0 %> ⭐</p>
+          <% if (hostel.isVerified) { %>
+            <span class="badge-verified">✓ Verified</span>
+          <% } else { %>
+            <span class="badge-pending">Pending Verification</span>
+          <% } %>
+        </div>
+
+        <div class="info-section">
+          <h3>Address</h3>
+          <% if (hostel.address.street) { %><p><%= hostel.address.street %></p><% } %>
+          <p><%= hostel.address.city %>, <%= hostel.address.state %></p>
+          <% if (hostel.address.pincode) { %><p>PIN: <%= hostel.address.pincode %></p><% } %>
+        </div>
+
+        <% if (hostel.facilities && hostel.facilities.length > 0) { %>
+          <div class="info-section">
+            <h3>Facilities</h3>
+            <ul><% hostel.facilities.forEach(f => { %><li><%= f %></li><% }) %></ul>
+          </div>
+        <% } %>
+
+        <% if (hostel.description) { %>
+          <div class="info-section"><h3>Description</h3><p><%= hostel.description %></p></div>
+        <% } %>
+
+        <% if (hostel.rules && hostel.rules.length > 0) { %>
+          <div class="info-section">
+            <h3>Rules</h3>
+            <ul><% hostel.rules.forEach(r => { %><li><%= r %></li><% }) %></ul>
+          </div>
+        <% } %>
+
+        <% if (hostel.reviews && hostel.reviews.length > 0) { %>
+          <div class="info-section">
+            <h3>Reviews</h3>
+            <% hostel.reviews.forEach(review => { %>
+              <div class="review">
+                <p><strong>Rating:</strong> <%= review.rating %> ⭐</p>
+                <p><%= review.comment %></p>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

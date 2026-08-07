@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head><title>Users - Admin</title><link rel="stylesheet" href="/style.css"></head>
+<body class="admin">
+  <div class="navbar">
+    <h2>⚙️ Admin Panel</h2>
+    <div>
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/hostels">Pending Hostels</a>
+      <a href="/admin/users" class="active">Users</a>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  </div>
+  <div class="container">
+    <h2 style="margin:20px 0">All Users</h2>
+    <% if(users.length === 0){ %>
+      <div class="empty"><h3>No users found</h3></div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Type</th><th>Status</th><th>Joined</th><th>Actions</th></tr></thead>
+          <tbody>
+            <% users.filter(u=>u.role!=='admin').forEach(u => { %>
+              <tr>
+                <td><strong><%=u.name%></strong></td>
+                <td><%=u.email%></td>
+                <td><%=u.phone%></td>
+                <td><span class="badge <%=u.userType==='provider'?'verified':'pending'%>"><%=u.userType%></span></td>
+                <td><span class="badge <%=u.isVerified?'verified':'pending'%>"><%=u.isVerified?'✓ Verified':'Pending'%></span></td>
+                <td><%=new Date(u.createdAt).toLocaleDateString()%></td>
+                <td class="actions">
+                  <% if(!u.isVerified){ %>
+                    <form method="POST" action="/admin/users/<%=u._id%>/verify">
+                      <button class="btn green" style="padding:7px 12px;font-size:13px">✓ Verify</button>
+                    </form>
+                  <% } %>
+                  <form method="POST" action="/admin/users/<%=u._id%>/delete">
+                    <button class="btn red" style="padding:7px 12px;font-size:13px">✗ Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

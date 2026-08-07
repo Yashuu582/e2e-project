@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Management - Admin</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar admin-nav">
+    <h2>User Management</h2>
+    <div class="nav-links">
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/hostels/pending">Pending Hostels</a>
+      <a href="/admin/users">Users</a>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container wide">
+    <h1>All Users</h1>
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+
+    <% if (users.length === 0) { %>
+      <div class="no-data"><p>No users found</p></div>
+    <% } else { %>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Phone</th><th>Type</th><th>Status</th><th>Joined</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <% users.filter(u => u.role !== 'admin').forEach(u => { %>
+              <tr>
+                <td><strong><%= u.name %></strong></td>
+                <td><%= u.email %></td>
+                <td><%= u.phone %></td>
+                <td><span class="role-badge user"><%= u.userType %></span></td>
+                <td>
+                  <% if (u.isVerified) { %>
+                    <span class="verified-badge">✓ Verified</span>
+                  <% } else { %>
+                    <span class="pending-badge">Pending</span>
+                  <% } %>
+                </td>
+                <td><%= new Date(u.createdAt).toLocaleDateString() %></td>
+                <td>
+                  <% if (!u.isVerified) { %>
+                    <form method="POST" action="/admin/users/<%= u._id %>/verify" style="display:inline">
+                      <button type="submit" class="btn-verify">✓ Verify</button>
+                    </form>
+                  <% } %>
+                  <form method="POST" action="/admin/users/<%= u._id %>/delete" style="display:inline">
+                    <button type="submit" class="btn-reject">✗ Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

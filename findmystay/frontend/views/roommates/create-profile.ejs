@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Profile - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Create Roommate Profile</h2>
+    <div class="nav-links"><a href="/roommates">Back</a></div>
+  </div>
+
+  <div class="container">
+    <div class="form-card">
+      <% if (error) { %><div class="error"><%= error %></div><% } %>
+      <form method="POST" action="/roommates/profile/create">
+        <h3>Basic Information</h3>
+        <textarea name="bio" placeholder="Tell about yourself" rows="3"></textarea>
+        <input type="number" name="age" placeholder="Age" required min="18">
+        <select name="occupation" required>
+          <option value="">Select Occupation</option>
+          <option value="student">Student</option>
+          <option value="working">Working Professional</option>
+          <option value="other">Other</option>
+        </select>
+
+        <h3>Budget (Monthly)</h3>
+        <input type="number" name="budgetMin" placeholder="Minimum Budget" required>
+        <input type="number" name="budgetMax" placeholder="Maximum Budget" required>
+
+        <h3>Location Preferences</h3>
+        <input type="text" name="city" placeholder="Preferred City" required>
+        <input type="text" name="areas" placeholder="Preferred Areas (comma separated)">
+
+        <h3>Roommate Preferences</h3>
+        <select name="gender">
+          <option value="any">Gender Preference</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="any">Any</option>
+        </select>
+        <select name="smoking">
+          <option value="no">Smoking</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="occasionally">Occasionally</option>
+        </select>
+        <select name="drinking">
+          <option value="no">Drinking</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="occasionally">Occasionally</option>
+        </select>
+        <select name="pets">
+          <option value="no">Pets</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <select name="foodPreference">
+          <option value="any">Food Preference</option>
+          <option value="veg">Vegetarian</option>
+          <option value="non-veg">Non-Vegetarian</option>
+          <option value="any">Any</option>
+        </select>
+        <select name="sleepSchedule">
+          <option value="flexible">Sleep Schedule</option>
+          <option value="early-bird">Early Bird</option>
+          <option value="night-owl">Night Owl</option>
+          <option value="flexible">Flexible</option>
+        </select>
+        <select name="cleanliness">
+          <option value="moderate">Cleanliness</option>
+          <option value="very-clean">Very Clean</option>
+          <option value="moderate">Moderate</option>
+          <option value="relaxed">Relaxed</option>
+        </select>
+
+        <h3>Additional</h3>
+        <input type="text" name="interests" placeholder="Interests (comma separated)">
+        <select name="lookingFor">
+          <option value="both">Looking For</option>
+          <option value="roommate">Roommate</option>
+          <option value="room">Room</option>
+          <option value="both">Both</option>
+        </select>
+
+        <button type="submit">Create Profile</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

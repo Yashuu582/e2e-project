@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hostels - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>🏨 Hostel Management</h2>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/hostels">Hostels</a>
+      <a href="/roommates">Roommates</a>
+      <% if (user) { %><a href="/logout" class="logout">Logout</a><% } else { %><a href="/login">Login</a><% } %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="search-box">
+      <form action="/hostels" method="GET">
+        <input type="text" name="city" placeholder="City">
+        <select name="hostelType">
+          <option value="">All Types</option>
+          <option value="boys">Boys</option>
+          <option value="girls">Girls</option>
+          <option value="co-ed">Co-ed</option>
+        </select>
+        <input type="text" name="search" placeholder="Search by name">
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+      <h2>All Hostels (<%= hostels.length %>)</h2>
+      <a href="/hostels/add" class="btn">+ Add Hostel</a>
+    </div>
+
+    <div class="hostel-grid">
+      <% if (hostels.length === 0) { %>
+        <div style="grid-column:1/-1;text-align:center;padding:60px;background:white;border-radius:10px">
+          <h3>No hostels found</h3>
+          <p style="margin:15px 0;color:#666">Be the first to add a hostel!</p>
+          <a href="/hostels/add" class="btn">Add Hostel</a>
+        </div>
+      <% } else { %>
+        <% hostels.forEach(hostel => { %>
+          <div class="hostel-card">
+            <h3><%= hostel.name %></h3>
+            <p><strong>Type:</strong> <%= hostel.hostelType %></p>
+            <p><strong>Location:</strong> <%= hostel.address.city %>, <%= hostel.address.state %></p>
+            <p><strong>Contact:</strong> <%= hostel.contactNumber %></p>
+            <p><strong>Rating:</strong> <%= hostel.rating || 0 %> ⭐</p>
+            <% if (hostel.isVerified) { %>
+              <span class="badge-verified">✓ Verified</span>
+            <% } else { %>
+              <span class="badge-pending">Pending Verification</span>
+            <% } %>
+            <br>
+            <a href="/hostels/<%= hostel._id %>" class="btn" style="margin-top:10px">View Details</a>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

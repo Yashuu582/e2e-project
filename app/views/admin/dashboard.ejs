@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head><title>Admin - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body class="admin">
+  <div class="navbar">
+    <h2>⚙️ Admin Panel</h2>
+    <div>
+      <a href="/admin" class="active">Dashboard</a>
+      <a href="/admin/hostels">Pending Hostels</a>
+      <a href="/admin/users">Users</a>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  </div>
+  <div class="container">
+    <h2 style="margin:20px 0">Dashboard</h2>
+    <div class="grid grid-4" style="margin-bottom:30px">
+      <div class="stat-card"><div class="stat-num"><%=stats.totalUsers%></div><div class="stat-label">Total Users</div></div>
+      <div class="stat-card green"><div class="stat-num"><%=stats.verifiedUsers%></div><div class="stat-label">Verified Users</div></div>
+      <div class="stat-card"><div class="stat-num"><%=stats.totalHostels%></div><div class="stat-label">Total Hostels</div></div>
+      <div class="stat-card green"><div class="stat-num"><%=stats.verifiedHostels%></div><div class="stat-label">Verified Hostels</div></div>
+      <div class="stat-card orange"><div class="stat-num"><%=stats.pendingHostels%></div><div class="stat-label">Pending Hostels</div></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-bottom:15px">Quick Actions</h3>
+      <a href="/admin/hostels" class="btn" style="margin-right:10px">Review Pending Hostels (<%=stats.pendingHostels%>)</a>
+      <a href="/admin/users" class="btn outline">Manage Users</a>
+    </div>
+  </div>
+</body>
+</html>

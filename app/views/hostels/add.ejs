@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Hostel - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar"><h2>🏠 FindMyStay</h2><div><a href="/hostels">← Back to Hostels</a></div></div>
+  <div class="container" style="max-width:650px">
+    <div class="card" style="margin-top:30px">
+      <h2 style="margin-bottom:20px">Add New Hostel</h2>
+      <% if(error){%><div class="alert error"><%=error%></div><%}%>
+      <form method="POST" action="/hostels/add">
+        <h3 style="margin:15px 0 10px;color:#667eea">Basic Info</h3>
+        <div class="form-group"><input type="text" name="name" placeholder="Hostel Name" required></div>
+        <div class="form-group">
+          <select name="hostelType" required>
+            <option value="">Select Type</option>
+            <option value="boys">Boys</option>
+            <option value="girls">Girls</option>
+            <option value="co-ed">Co-ed</option>
+          </select>
+        </div>
+        <div class="form-group"><input type="tel" name="contactNumber" placeholder="Contact Number" required></div>
+        <div class="form-group"><input type="email" name="email" placeholder="Email (optional)"></div>
+
+        <h3 style="margin:15px 0 10px;color:#667eea">Address</h3>
+        <div class="form-group"><input type="text" name="street" placeholder="Street"></div>
+        <div class="form-group"><input type="text" name="city" placeholder="City" required></div>
+        <div class="form-group"><input type="text" name="state" placeholder="State" required></div>
+        <div class="form-group"><input type="text" name="pincode" placeholder="PIN Code"></div>
+
+        <h3 style="margin:15px 0 10px;color:#667eea">Details</h3>
+        <div class="form-group"><textarea name="description" placeholder="Description" rows="3"></textarea></div>
+        <div class="form-group"><input type="text" name="facilities" placeholder="Facilities (comma separated)"></div>
+        <div class="form-group"><input type="text" name="rules" placeholder="Rules (comma separated)"></div>
+
+        <button type="submit" class="btn full">Add Hostel</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

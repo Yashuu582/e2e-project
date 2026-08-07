@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add Hostel - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>Add New Hostel</h2>
+    <div class="nav-links"><a href="/hostels">Back to Hostels</a></div>
+  </div>
+
+  <div class="container">
+    <div class="form-card">
+      <% if (error) { %><div class="error"><%= error %></div><% } %>
+      <form method="POST" action="/hostels/add">
+        <h3>Basic Information</h3>
+        <input type="text" name="name" placeholder="Hostel Name" required>
+        <select name="hostelType" required>
+          <option value="">Select Type</option>
+          <option value="boys">Boys</option>
+          <option value="girls">Girls</option>
+          <option value="co-ed">Co-ed</option>
+        </select>
+        <input type="tel" name="contactNumber" placeholder="Contact Number" required>
+        <input type="email" name="email" placeholder="Email (optional)">
+
+        <h3>Address</h3>
+        <input type="text" name="street" placeholder="Street Address">
+        <input type="text" name="city" placeholder="City" required>
+        <input type="text" name="state" placeholder="State" required>
+        <input type="text" name="pincode" placeholder="PIN Code">
+
+        <h3>Additional Details</h3>
+        <textarea name="description" placeholder="Description" rows="4"></textarea>
+        <input type="text" name="facilities" placeholder="Facilities (comma separated)">
+        <input type="text" name="rules" placeholder="Rules (comma separated)">
+
+        <button type="submit">Add Hostel</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

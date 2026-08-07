@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head><title><%=hostel.name%> - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar"><h2>🏠 FindMyStay</h2><div><a href="/hostels">← Back to Hostels</a></div></div>
+  <div class="container" style="max-width:750px">
+    <div class="card" style="margin-top:30px">
+      <h1 style="margin-bottom:5px"><%=hostel.name%></h1>
+      <span class="badge <%=hostel.isVerified?'verified':'pending'%>"><%=hostel.isVerified?'✓ Verified':'⏳ Pending Verification'%></span>
+
+      <div class="detail-section" style="margin-top:20px">
+        <h3>Basic Information</h3>
+        <p>🏠 Type: <%=hostel.hostelType%></p>
+        <p>📞 Contact: <%=hostel.contactNumber%></p>
+        <% if(hostel.email){%><p>✉️ Email: <%=hostel.email%></p><%}%>
+        <p>⭐ Rating: <%=hostel.rating||0%></p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Address</h3>
+        <% if(hostel.address.street){%><p><%=hostel.address.street%></p><%}%>
+        <p><%=hostel.address.city%>, <%=hostel.address.state%> <%=hostel.address.pincode||''%></p>
+      </div>
+
+      <% if(hostel.description){ %>
+        <div class="detail-section"><h3>Description</h3><p><%=hostel.description%></p></div>
+      <% } %>
+
+      <% if(hostel.facilities?.length){ %>
+        <div class="detail-section">
+          <h3>Facilities</h3>
+          <div class="tags"><% hostel.facilities.forEach(f=>{%><span class="tag"><%=f%></span><%})%></div>
+        </div>
+      <% } %>
+
+      <% if(hostel.rules?.length){ %>
+        <div class="detail-section">
+          <h3>Rules</h3>
+          <ul><% hostel.rules.forEach(r=>{%><li><%=r%></li><%})%></ul>
+        </div>
+      <% } %>
+
+      <% if(hostel.reviews?.length){ %>
+        <div class="detail-section">
+          <h3>Reviews</h3>
+          <% hostel.reviews.forEach(r=>{%>
+            <div style="background:#f9f9f9;padding:12px;border-radius:7px;margin:8px 0;border-left:3px solid #667eea">
+              <p>⭐ <%=r.rating%> — <%=r.comment%></p>
+            </div>
+          <%})%>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

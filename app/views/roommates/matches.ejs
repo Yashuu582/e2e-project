@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head><title>Matches - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar"><h2>🏠 FindMyStay</h2><div><a href="/roommates">← Back</a><a href="/roommates/create">Create Profile</a></div></div>
+  <div class="container">
+    <% if(matches.length === 0){ %>
+      <div class="empty" style="margin-top:30px">
+        <h3>No matches found</h3>
+        <p style="margin:10px 0">Create your profile first to find compatible roommates</p>
+        <a href="/roommates/create" class="btn" style="margin-top:15px">Create Profile</a>
+      </div>
+    <% } else { %>
+      <div class="section-header" style="margin-top:10px">
+        <h2>Found <%=matches.length%> Compatible Roommates</h2>
+      </div>
+      <div class="grid grid-3">
+        <% matches.forEach(m => { %>
+          <div class="match-card">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <span class="score-badge"><%=m.score%>%</span>
+              <span style="color:#888;font-size:13px">Compatibility</span>
+            </div>
+            <p><strong>Age:</strong> <%=m.age%> &nbsp;|&nbsp; <strong><%=m.occupation%></strong></p>
+            <% if(m.bio){%><p style="color:#666;font-size:13px;margin:8px 0"><%=m.bio%></p><%}%>
+            <p style="margin:6px 0">💰 ₹<%=m.budget.min%> – ₹<%=m.budget.max%>/mo</p>
+            <p>📍 <%=m.preferredLocation.city%></p>
+            <p>🔍 Looking for: <%=m.lookingFor%></p>
+            <div class="tags" style="margin-top:10px">
+              <span class="tag">🚬 <%=m.preferences.smoking%></span>
+              <span class="tag">🍽️ <%=m.preferences.foodPreference%></span>
+              <span class="tag">😴 <%=m.preferences.sleepSchedule%></span>
+              <span class="tag">🧹 <%=m.preferences.cleanliness%></span>
+            </div>
+            <% if(m.interests?.length){ %>
+              <div class="tags" style="margin-top:6px">
+                <% m.interests.forEach(i=>{%><span class="tag"><%=i%></span><%})%>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

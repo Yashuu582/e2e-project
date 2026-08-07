@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head><title>Hostels - FindMyStay</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+  <div class="navbar">
+    <h2>🏠 FindMyStay</h2>
+    <div>
+      <a href="/">Home</a><a href="/hostels" class="active">Hostels</a><a href="/roommates">Roommates</a>
+      <% if(user?.role==='admin'){%><a href="/admin">Admin</a><%}%>
+      <% if(user){%><a href="/logout" class="logout">Logout</a><%}else{%><a href="/login">Login</a><%}%>
+    </div>
+  </div>
+  <div class="container">
+    <form class="search-bar" action="/hostels" method="GET">
+      <input type="text" name="city" placeholder="Search by city" value="<%=query.city||''%>">
+      <select name="hostelType">
+        <option value="">All Types</option>
+        <option value="boys" <%=query.hostelType==='boys'?'selected':''%>>Boys</option>
+        <option value="girls" <%=query.hostelType==='girls'?'selected':''%>>Girls</option>
+        <option value="co-ed" <%=query.hostelType==='co-ed'?'selected':''%>>Co-ed</option>
+      </select>
+      <input type="text" name="search" placeholder="Search by name" value="<%=query.search||''%>">
+      <button type="submit" class="btn">Search</button>
+    </form>
+
+    <div class="section-header">
+      <h2>Hostels (<%= hostels.length %>)</h2>
+      <a href="/hostels/add" class="btn">+ Add Hostel</a>
+    </div>
+
+    <% if(error){%><div class="alert error"><%=error%></div><%}%>
+
+    <% if(hostels.length === 0){ %>
+      <div class="empty"><h3>No hostels found</h3><p>Try a different search or add one!</p></div>
+    <% } else { %>
+      <div class="grid grid-3">
+        <% hostels.forEach(h => { %>
+          <div class="hostel-card">
+            <h3><%=h.name%></h3>
+            <p>📍 <%=h.address.city%>, <%=h.address.state%></p>
+            <p>🏠 <%=h.hostelType%> &nbsp;|&nbsp; ⭐ <%=h.rating||0%></p>
+            <p>📞 <%=h.contactNumber%></p>
+            <span class="badge <%=h.isVerified?'verified':'pending'%>">
+              <%=h.isVerified?'✓ Verified':'⏳ Pending'%>
+            </span>
+            <br>
+            <a href="/hostels/<%=h._id%>" class="btn" style="margin-top:12px">View Details</a>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

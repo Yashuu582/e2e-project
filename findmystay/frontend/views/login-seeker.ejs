@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Seeker Login - FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-page">
+  <div class="auth-container">
+    <div class="card">
+      <h1>🏠 Seeker Login</h1>
+      <p style="text-align:center;color:#666;margin-bottom:15px">Looking for a home? Login here</p>
+      <% if (success) { %><div class="success-msg"><%= success %></div><% } %>
+      <% if (error) { %><div class="error"><%= error %></div><% } %>
+      <form method="POST" action="/login/seeker">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login as Seeker</button>
+      </form>
+      <p>Provider? <a href="/login/provider">Provider Login</a> | Admin? <a href="/login/admin">Admin Login</a></p>
+      <p>No account? <a href="/register">Register</a></p>
+    </div>
+  </div>
+</body>
+</html>

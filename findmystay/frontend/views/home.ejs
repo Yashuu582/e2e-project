@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FindMyStay</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar">
+    <h2>🏠 FindMyStay</h2>
+    <div class="nav-links">
+      <a href="/hostels">Hostels</a>
+      <a href="/roommates">Roommates</a>
+      <% if (user && user.role === 'admin') { %><a href="/admin">Admin</a><% } %>
+      <% if (user) { %><a href="/logout" class="logout">Logout (<%= user.name %>)</a>
+      <% } else { %><a href="/login">Login</a><a href="/register">Register</a><% } %>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="home-hero">
+      <h1>Welcome to FindMyStay</h1>
+      <p>Find safe hostels, compatible roommates, and affordable rentals</p>
+      <% if (!user) { %>
+        <div class="home-actions">
+          <a href="/register" class="btn">Get Started</a>
+          <a href="/login" class="btn">Login</a>
+        </div>
+      <% } else { %>
+        <p>Hello, <strong><%= user.name %></strong>! What would you like to do?</p>
+      <% } %>
+    </div>
+
+    <div class="home-modules">
+      <div class="module-card">
+        <h3>🏨 Hostels</h3>
+        <p>Browse and manage hostel listings with search and filters</p>
+        <a href="/hostels" class="btn">Browse Hostels</a>
+      </div>
+      <div class="module-card">
+        <h3>🤝 Roommates</h3>
+        <p>Find compatible roommates based on preferences and budget</p>
+        <a href="/roommates" class="btn">Find Roommates</a>
+      </div>
+      <% if (user && user.role === 'admin') { %>
+      <div class="module-card">
+        <h3>⚙️ Admin</h3>
+        <p>Manage users, verify hostels, and view platform statistics</p>
+        <a href="/admin" class="btn">Admin Panel</a>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head><title>Pending Hostels - Admin</title><link rel="stylesheet" href="/style.css"></head>
+<body class="admin">
+  <div class="navbar">
+    <h2>⚙️ Admin Panel</h2>
+    <div>
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/hostels" class="active">Pending Hostels</a>
+      <a href="/admin/users">Users</a>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  </div>
+  <div class="container">
+    <h2 style="margin:20px 0">Pending Hostels</h2>
+    <% if(hostels.length === 0){ %>
+      <div class="empty"><h3>No pending hostels</h3><p>All hostels have been reviewed.</p></div>
+    <% } else { %>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Type</th><th>Location</th><th>Owner</th><th>Contact</th><th>Date</th><th>Actions</th></tr></thead>
+          <tbody>
+            <% hostels.forEach(h => { %>
+              <tr>
+                <td><strong><%=h.name%></strong></td>
+                <td><%=h.hostelType%></td>
+                <td><%=h.address.city%>, <%=h.address.state%></td>
+                <td><%=h.owner?.name||'N/A'%></td>
+                <td><%=h.contactNumber%></td>
+                <td><%=new Date(h.createdAt).toLocaleDateString()%></td>
+                <td class="actions">
+                  <form method="POST" action="/admin/hostels/<%=h._id%>/verify">
+                    <button class="btn green" style="padding:7px 12px;font-size:13px">✓ Verify</button>
+                  </form>
+                  <form method="POST" action="/admin/hostels/<%=h._id%>/reject">
+                    <button class="btn red" style="padding:7px 12px;font-size:13px">✗ Reject</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

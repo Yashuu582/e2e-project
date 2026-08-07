@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pending Hostels - Admin</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="navbar admin-nav">
+    <h2>Pending Hostels</h2>
+    <div class="nav-links">
+      <a href="/admin">Dashboard</a>
+      <a href="/admin/hostels/pending">Pending Hostels</a>
+      <a href="/admin/users">Users</a>
+      <a href="/logout" class="logout">Logout</a>
+    </div>
+  </div>
+
+  <div class="container wide">
+    <h1>Hostels Awaiting Verification</h1>
+    <% if (error) { %><div class="error"><%= error %></div><% } %>
+
+    <% if (hostels.length === 0) { %>
+      <div class="no-data"><p>No pending hostels for verification</p></div>
+    <% } else { %>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Hostel Name</th><th>Type</th><th>Location</th><th>Owner</th><th>Contact</th><th>Created</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <% hostels.forEach(hostel => { %>
+              <tr>
+                <td><strong><%= hostel.name %></strong></td>
+                <td><%= hostel.hostelType %></td>
+                <td><%= hostel.address.city %>, <%= hostel.address.state %></td>
+                <td><%= hostel.owner ? hostel.owner.name : 'N/A' %></td>
+                <td><%= hostel.contactNumber %></td>
+                <td><%= new Date(hostel.createdAt).toLocaleDateString() %></td>
+                <td>
+                  <form method="POST" action="/admin/hostels/<%= hostel._id %>/verify" style="display:inline">
+                    <button type="submit" class="btn-verify">✓ Verify</button>
+                  </form>
+                  <form method="POST" action="/admin/hostels/<%= hostel._id %>/reject" style="display:inline">
+                    <button type="submit" class="btn-reject">✗ Reject</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>
